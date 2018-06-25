@@ -1,7 +1,5 @@
 package streamming;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -12,14 +10,9 @@ import main.Cliente;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.JButton;
-import java.awt.Button;
-import java.awt.TextField;
 import java.awt.Color;
 
 public class TelaInserir {
@@ -27,23 +20,7 @@ public class TelaInserir {
 	private JFrame frame;
 	private JTextField txtExemplo;
 	private JTextField txtInserirFaixas;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaInserir window = new TelaInserir();
-					window.frame.setVisible(true);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
@@ -74,8 +51,13 @@ public class TelaInserir {
 			public void actionPerformed(ActionEvent arg0){
 				try {
 						String txt = txtExemplo.getText();
-						Cliente.conexao.inserir(txt);
-						JOptionPane.showMessageDialog(null, "Faixa inserida com sucesso");
+						if (!txt.isEmpty()) {
+							Cliente.conexao.inserir(txt);
+							JOptionPane.showMessageDialog(null, "A Faixa: "+txt+" foi inserida com sucesso!");
+							txtExemplo.setText("");
+						}else {
+							JOptionPane.showMessageDialog(null, "A Faixa não deve estar vazia");
+						}					
 					
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
@@ -89,6 +71,11 @@ public class TelaInserir {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Cliente.conexao.sendId(0);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 				hide();
 			}
 		});

@@ -1,41 +1,23 @@
 package streamming;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import main.Cliente;
 
 public class TelaInicial {
 
 	public JFrame frame;
 	private JTextField txtBemVindosAo;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) throws RemoteException, NotBoundException {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaInicial window = new TelaInicial();
-					window.frame.setVisible(true);
-										
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -48,6 +30,7 @@ public class TelaInicial {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 520, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +39,15 @@ public class TelaInicial {
 		btnListarFaixas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaListar tela = new TelaListar();
+				try {
+					Cliente.conexao.sendId(Cliente.id);
+					while(!Cliente.conexao.getPosso(Cliente.id)) {				
+						JOptionPane.showMessageDialog(null, "Aguarde a sua vez");
+					}
+					
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 				tela.show();
 			}
 		});
@@ -65,7 +57,18 @@ public class TelaInicial {
 		btnInserirFaixas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaInserir tela = new TelaInserir();
-				tela.show();
+				try {
+					if (Cliente.conexao.id(0) || Cliente.conexao.getPosso(Cliente.id)) {						
+						Cliente.conexao.sendId(Cliente.id);
+					}
+					while(!Cliente.conexao.getPosso(Cliente.id)) {				
+						JOptionPane.showMessageDialog(null, "Aguarde a sua vez");
+					}
+//					Cliente.conexao.checkList(Cliente.conexao.exibir());
+					tela.show();
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnInserirFaixas.setBounds(58, 185, 130, 25);
@@ -79,6 +82,14 @@ public class TelaInicial {
 		btnRemoverFaixa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaRemover tela = new TelaRemover();
+				try {
+					Cliente.conexao.sendId(Cliente.id);
+					while(!Cliente.conexao.getPosso(Cliente.id)) {				
+						JOptionPane.showMessageDialog(null, "Aguarde a sua vez");
+					}
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
 				tela.show();
 			}
 		});
@@ -111,4 +122,5 @@ public class TelaInicial {
 	public void show(){
 		  this.frame.setVisible(true);
 		}	
+	
 }

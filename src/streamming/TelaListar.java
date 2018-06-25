@@ -1,17 +1,13 @@
 package streamming;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
 
 import main.Cliente;
-import main.Streamming;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -19,23 +15,6 @@ import javax.swing.JButton;
 public class TelaListar {
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaListar window = new TelaListar();
-					window.frame.setVisible(true);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.

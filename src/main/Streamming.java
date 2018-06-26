@@ -14,12 +14,14 @@ public interface Streamming extends java.rmi.Remote {
 
 	public void setPosso(boolean status) throws java.rmi.RemoteException;
 
-	public void sendId(long id) throws java.rmi.RemoteException;
-	
-	public boolean id (long id) throws java.rmi.RemoteException;
-	
+	public boolean id(long id) throws java.rmi.RemoteException;
+
 	public void setId(long id) throws java.rmi.RemoteException;
-	
+
 	public String checkList(ArrayList lista) throws java.rmi.RemoteException;
-	
+
+	public void setIdPlayer(long id) throws java.rmi.RemoteException;
+
+	public long getIdPlayer() throws java.rmi.RemoteException;
+
 }

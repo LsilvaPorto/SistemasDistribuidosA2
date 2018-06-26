@@ -72,7 +72,7 @@ public class TelaInserir {
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Cliente.conexao.sendId(0);
+					Cliente.conexao.setId(0);
 				} catch (RemoteException e) {
 					e.printStackTrace();
 				}

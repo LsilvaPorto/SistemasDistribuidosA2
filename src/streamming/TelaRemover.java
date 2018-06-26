@@ -80,6 +80,11 @@ public class TelaRemover {
 		btnVoltar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Cliente.conexao.setIdPlayer(0);
+				} catch (Exception e) {
+					
+				}
 				hide();
 			}
 

@@ -5,6 +5,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import streamming.TelaInicial;
+import streamming.TelaSelecionarServidor;
 
 public class Cliente {
 	
@@ -14,13 +15,15 @@ public class Cliente {
 	
 	public static void main(String[] args)throws RemoteException, NotBoundException {
 	 
+		TelaSelecionarServidor tela = new TelaSelecionarServidor();
+		tela.show();
 		try {
-			conexao = (Streamming) Naming.lookup("//localhost/streamming");
-			TelaInicial tela = new TelaInicial();
+
+			if (conexao.getIdPlayer() == 0) {
+				conexao.setIdPlayer(id);
+				System.out.println(conexao.getIdPlayer());
+			}
 			System.out.println(id);
-			//conexao.sendId(id);
-//			System.out.println(conexao.ids());
-			tela.show();
 			
 			
 		} catch (Exception murle) {

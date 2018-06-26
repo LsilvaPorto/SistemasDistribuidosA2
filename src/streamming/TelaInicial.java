@@ -18,6 +18,7 @@ public class TelaInicial {
 
 	public JFrame frame;
 	private JTextField txtBemVindosAo;
+	
 
 	/**
 	 * Create the application.
@@ -30,74 +31,117 @@ public class TelaInicial {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 520, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JButton btnListarFaixas = new JButton("Listar Faixas");
 		btnListarFaixas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaListar tela = new TelaListar();
+			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Cliente.conexao.sendId(Cliente.id);
-					while(!Cliente.conexao.getPosso(Cliente.id)) {				
-						JOptionPane.showMessageDialog(null, "Aguarde a sua vez");
-					}
-					
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
+					new Thread() {
+
+						@Override
+						public void run() {
+							try {
+								if (Cliente.conexao.getIdPlayer() == 0) {
+									Cliente.conexao.setIdPlayer(Cliente.id);
+								}
+								System.out.println(Cliente.conexao.getPosso(Cliente.id));
+								if (Cliente.conexao.getPosso(Cliente.id)) {
+									TelaListar tela = new TelaListar();
+									tela.show();
+								} else
+									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
+							} catch (RemoteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}.start();
+
+					// Cliente.conexao.checkList(Cliente.conexao.exibir());
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
-				tela.show();
+
 			}
 		});
 		btnListarFaixas.setBounds(58, 116, 130, 25);
-		
+
 		JButton btnInserirFaixas = new JButton("Inserir Faixas");
-		btnInserirFaixas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				TelaInserir tela = new TelaInserir();
-				try {
-					if (Cliente.conexao.id(0) || Cliente.conexao.getPosso(Cliente.id)) {						
-						Cliente.conexao.sendId(Cliente.id);
-					}
-					while(!Cliente.conexao.getPosso(Cliente.id)) {				
-						JOptionPane.showMessageDialog(null, "Aguarde a sua vez");
-					}
-//					Cliente.conexao.checkList(Cliente.conexao.exibir());
-					tela.show();
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
 		btnInserirFaixas.setBounds(58, 185, 130, 25);
 		btnInserirFaixas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					new Thread() {
+
+						@Override
+						public void run() {
+							try {
+								if (Cliente.conexao.getIdPlayer() == 0) {
+									Cliente.conexao.setIdPlayer(Cliente.id);
+								}
+								System.out.println(Cliente.conexao.getPosso(Cliente.id));
+								if (Cliente.conexao.getPosso(Cliente.id)) {
+									TelaInserir tela = new TelaInserir();
+									tela.show();
+								} else
+									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
+							} catch (RemoteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}.start();
+
+					// Cliente.conexao.checkList(Cliente.conexao.exibir());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
 			}
 		});
-		
+
 		JButton btnRemoverFaixa = new JButton("Remover Faixa");
 		btnRemoverFaixa.setBounds(286, 116, 130, 25);
 		btnRemoverFaixa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaRemover tela = new TelaRemover();
+			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Cliente.conexao.sendId(Cliente.id);
-					while(!Cliente.conexao.getPosso(Cliente.id)) {				
-						JOptionPane.showMessageDialog(null, "Aguarde a sua vez");
-					}
-				} catch (RemoteException e1) {
-					e1.printStackTrace();
+					new Thread() {
+
+						@Override
+						public void run() {
+							try {
+								if (Cliente.conexao.getIdPlayer() == 0) {
+									Cliente.conexao.setIdPlayer(Cliente.id);
+								}
+								System.out.println(Cliente.conexao.getPosso(Cliente.id));
+								if (Cliente.conexao.getPosso(Cliente.id)) {
+									TelaRemover tela = new TelaRemover();
+									tela.show();
+								} else
+									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
+							} catch (RemoteException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					}.start();
+
+					// Cliente.conexao.checkList(Cliente.conexao.exibir());
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
-				tela.show();
+
 			}
 		});
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnInserirFaixas);
 		frame.getContentPane().add(btnRemoverFaixa);
 		frame.getContentPane().add(btnListarFaixas);
-		
+
 		txtBemVindosAo = new JTextField();
 		txtBemVindosAo.setForeground(Color.BLUE);
 		txtBemVindosAo.setBackground(Color.WHITE);
@@ -108,7 +152,7 @@ public class TelaInicial {
 		txtBemVindosAo.setBounds(23, 28, 455, 63);
 		frame.getContentPane().add(txtBemVindosAo);
 		txtBemVindosAo.setColumns(10);
-		
+
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -117,10 +161,11 @@ public class TelaInicial {
 		});
 		btnSair.setBounds(286, 185, 130, 25);
 		frame.getContentPane().add(btnSair);
-		
+
 	}
-	public void show(){
-		  this.frame.setVisible(true);
-		}	
-	
+
+	public void show() {
+		this.frame.setVisible(true);
+	}
+
 }

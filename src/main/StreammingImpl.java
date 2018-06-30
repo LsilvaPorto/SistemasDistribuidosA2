@@ -11,8 +11,6 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 	public ArrayList<String> lista = new ArrayList<String>();
 	public ArrayList<String> listaVirtual = new ArrayList<String>();
 
-	private boolean posso = true;
-	public ArrayList<Long> ids = new ArrayList<Long>();
 	private long idPlayer = 0;
 	private long id;
 
@@ -22,34 +20,37 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 
 	@Override
 	public void inserir(String musica) throws java.rmi.RemoteException {
-		lista.add(musica);
+		listaVirtual.add(musica);
 
 	}
 
 	@Override
 	public void remover(String musica) throws java.rmi.RemoteException {
-		lista.remove(musica);
+		listaVirtual.remove(musica);
 
 	}
 
 	@Override
 	public ArrayList<String> exibir() throws java.rmi.RemoteException {
-		return lista;
+		return listaVirtual;
 
 	}
 
 	@Override
 	public boolean getPosso(long id) throws RemoteException {
-		if (idPlayer == id) {
+		if (idPlayer == id && lista.equals(listaVirtual)) {
 			return true;
 		} else
 			return false;
 	}
 
 	@Override
-	public void setPosso(boolean status) throws RemoteException {
-		posso = status;
-
+	public boolean getPosso2(long id) throws RemoteException {// verificação do cliente 2 para saber se ele pode ou nao
+																// salvar as alterações feitas pelo cliente 1
+		if (idPlayer != id && !lista.equals(listaVirtual)) {
+			return true;
+		} else
+			return false;
 	}
 
 	@Override
@@ -68,21 +69,28 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 	}
 
 	@Override
-	public String checkList(ArrayList lista) throws RemoteException {
-		/*if (this.BDlista.equals(null) && lista != null) {
+	public String returnList() throws RemoteException {
+		if (!lista.equals(listaVirtual)) {
 			String resposta = JOptionPane.showInputDialog("Alterações foram feitas, salvar alterações?\nsim/ nao");
+			String resposta2 = JOptionPane.showInputDialog("As alterações foram salvas!");
 			if (resposta.equals("sim")) {
-				this.BDlista.addAll(lista);
-				return resposta;
-			} else {
-				return null;
+				lista = listaVirtual;
+				return resposta2;
+			} else if (resposta.equals("nao")){
+				listaVirtual = lista;
+				return resposta2 = JOptionPane.showInputDialog("As alterações foram descartadas!");
 			}
 		}
-		// }else if (!lista.equals(this.BDlista)) {
-		// }*/
 		return null;
 	}
 
+	@Override
+	public boolean checkList() {
+		if (lista.equals(listaVirtual)) {
+			return true;
+		}else
+			return false;
+	}
 	@Override
 	public void setIdPlayer(long id) throws RemoteException {
 		this.idPlayer = id;

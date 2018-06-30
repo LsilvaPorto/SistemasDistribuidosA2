@@ -52,7 +52,10 @@ public class TelaInicial {
 								if (Cliente.conexao.getPosso(Cliente.id)) {
 									TelaListar tela = new TelaListar();
 									tela.show();
-								} else
+								} else if(Cliente.conexao.getPosso2(Cliente.id)) {
+									TelaListar tela = new TelaListar();
+									tela.show();
+								}else
 									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
 							} catch (RemoteException e) {
 								// TODO Auto-generated catch block
@@ -87,7 +90,10 @@ public class TelaInicial {
 								if (Cliente.conexao.getPosso(Cliente.id)) {
 									TelaInserir tela = new TelaInserir();
 									tela.show();
-								} else
+								} else if(Cliente.conexao.getPosso2(Cliente.id)) {
+									TelaInserir tela = new TelaInserir();
+									tela.show();
+								}else
 									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
 							} catch (RemoteException e) {
 								// TODO Auto-generated catch block
@@ -114,14 +120,17 @@ public class TelaInicial {
 						@Override
 						public void run() {
 							try {
-								if (Cliente.conexao.getIdPlayer() == 0) {
+								if ((Cliente.conexao.getIdPlayer() == 0) && (Cliente.conexao.checkList())) {
 									Cliente.conexao.setIdPlayer(Cliente.id);
 								}
 								System.out.println(Cliente.conexao.getPosso(Cliente.id));
 								if (Cliente.conexao.getPosso(Cliente.id)) {
 									TelaRemover tela = new TelaRemover();
 									tela.show();
-								} else
+								} else if(Cliente.conexao.getPosso2(Cliente.id)) {
+									TelaRemover tela = new TelaRemover();
+									tela.show();
+								}else
 									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
 							} catch (RemoteException e) {
 								// TODO Auto-generated catch block

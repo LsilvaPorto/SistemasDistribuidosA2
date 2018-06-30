@@ -1,10 +1,7 @@
 package main;
 
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
-import streamming.TelaInicial;
 import streamming.TelaSelecionarServidor;
 
 public class Cliente {

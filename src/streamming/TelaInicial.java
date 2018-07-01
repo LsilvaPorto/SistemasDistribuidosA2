@@ -49,11 +49,14 @@ public class TelaInicial {
 									Cliente.conexao.setIdPlayer(Cliente.id);
 								}
 								System.out.println(Cliente.conexao.getPosso(Cliente.id));
+								System.out.println(Cliente.conexao.getIdPlayer());
 								if (Cliente.conexao.getPosso(Cliente.id)) {
 									TelaListar tela = new TelaListar();
+									Cliente.conexao.returnList(Cliente.id);
 									tela.show();
 								} else if(Cliente.conexao.getPosso2(Cliente.id)) {
 									TelaListar tela = new TelaListar();
+									Cliente.conexao.returnList(Cliente.id);
 									tela.show();
 								}else
 									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
@@ -87,11 +90,14 @@ public class TelaInicial {
 									Cliente.conexao.setIdPlayer(Cliente.id);
 								}
 								System.out.println(Cliente.conexao.getPosso(Cliente.id));
+								System.out.println(Cliente.conexao.getIdPlayer());
 								if (Cliente.conexao.getPosso(Cliente.id)) {
 									TelaInserir tela = new TelaInserir();
+									Cliente.conexao.returnList(Cliente.id);
 									tela.show();
 								} else if(Cliente.conexao.getPosso2(Cliente.id)) {
 									TelaInserir tela = new TelaInserir();
+									Cliente.conexao.returnList(Cliente.id);
 									tela.show();
 								}else
 									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");
@@ -124,11 +130,15 @@ public class TelaInicial {
 									Cliente.conexao.setIdPlayer(Cliente.id);
 								}
 								System.out.println(Cliente.conexao.getPosso(Cliente.id));
+								System.out.println(Cliente.conexao.getIdPlayer());
 								if (Cliente.conexao.getPosso(Cliente.id)) {
 									TelaRemover tela = new TelaRemover();
+									Cliente.conexao.returnList(Cliente.id);
 									tela.show();
 								} else if(Cliente.conexao.getPosso2(Cliente.id)) {
 									TelaRemover tela = new TelaRemover();
+									Cliente.conexao.returnList(Cliente.id);
+
 									tela.show();
 								}else
 									JOptionPane.showMessageDialog(null, "Aguarde a sua vez!");

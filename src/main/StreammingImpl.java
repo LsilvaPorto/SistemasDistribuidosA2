@@ -12,7 +12,6 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 	public ArrayList<String> listaVirtual = new ArrayList<String>();
 
 	private long idPlayer = 0;
-	private long id;
 
 	public StreammingImpl() throws java.rmi.RemoteException {
 		super();
@@ -54,31 +53,17 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 	}
 
 	@Override
-	public boolean id(long id) throws RemoteException {
-		if (id == this.id) {
-			return true;
-		} else
-			return false;
-
-	}
-
-	@Override
-	public void setId(long id) throws RemoteException {
-		this.id = id;
-
-	}
-
-	@Override
-	public String returnList() throws RemoteException {
+	public String returnList(long id) throws RemoteException {
 		if (!lista.equals(listaVirtual)) {
 			String resposta = JOptionPane.showInputDialog("Alterações foram feitas, salvar alterações?\nsim/ nao");
-			String resposta2 = JOptionPane.showInputDialog("As alterações foram salvas!");
 			if (resposta.equals("sim")) {
 				lista = listaVirtual;
-				return resposta2;
+				JOptionPane.showMessageDialog(null,"As alterações foram salvas!");
+				return  null;
 			} else if (resposta.equals("nao")){
 				listaVirtual = lista;
-				return resposta2 = JOptionPane.showInputDialog("As alterações foram descartadas!");
+				JOptionPane.showMessageDialog(null,"As alterações foram descartadas!");
+				return null;
 			}
 		}
 		return null;

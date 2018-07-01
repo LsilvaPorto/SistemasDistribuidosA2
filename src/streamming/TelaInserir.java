@@ -51,10 +51,13 @@ public class TelaInserir {
 			public void actionPerformed(ActionEvent arg0){
 				try {
 						String txt = txtExemplo.getText();
-						if (!txt.isEmpty()) {
+						if (Cliente.conexao.exibir().contains(txt)) {
+							JOptionPane.showMessageDialog(null, "A Faixa: "+txt+" já foi inserida anteriormente!");
+						}else if (!txt.isEmpty()) {
 							Cliente.conexao.inserir(txt);
 							JOptionPane.showMessageDialog(null, "A Faixa: "+txt+" foi inserida com sucesso!");
 							txtExemplo.setText("");
+							hide();
 						}else {
 							JOptionPane.showMessageDialog(null, "A Faixa não deve estar vazia");
 						}					

@@ -14,11 +14,11 @@ public class Cliente {
 	
 	public static void main(String[] args)throws RemoteException, NotBoundException {
 	 
-		//TelaSelecionarServidor tela = new TelaSelecionarServidor();
-		TelaInicial tela = new TelaInicial();
+		TelaSelecionarServidor tela = new TelaSelecionarServidor();
+//		TelaInicial tela = new TelaInicial();
 		tela.show();
 		try {
-			conexao = (Streamming) Naming.lookup("//localhost/streamming");
+//			conexao = (Streamming) Naming.lookup("//localhost/streamming");
 
 			if (conexao.getIdPlayer() == 0) {
 				conexao.setIdPlayer(id);

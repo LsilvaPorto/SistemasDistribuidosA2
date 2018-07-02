@@ -92,7 +92,7 @@ public class TelaSelecionarServidor {
 		btnServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Streamming con = (Streamming) Naming.lookup("//localhost/streamming");
+					Streamming con = (Streamming) Naming.lookup("//10.0.200.118/streamming");
 					Cliente.conexao = con;
 					TelaInicial tela = new TelaInicial();
 					tela.show();

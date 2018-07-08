@@ -23,6 +23,7 @@ public class TelaInicial {
 	public JFrame frame;
 	private JTextField txtBemVindosAo;
 	private Timer time_check = new Timer();
+	private Timer time = new Timer();
 
 	private JLabel lblClienteId = new JLabel("");
 
@@ -32,15 +33,41 @@ public class TelaInicial {
 	public TelaInicial() {
 		initialize();
 		this.time_check.schedule(this.check_alteracao(), new Date(), 1000);
+		this.time.schedule(this.check(), new Date(), 1000);
 		lblClienteId.setText(String.valueOf(Cliente.id));
 
 	}
 
+	private TimerTask check() {
+		return new TimerTask() {
+			@Override
+			public void run() {
+				try {
+						if (Cliente.id != Cliente.conexao.getIdPlayer()) {	
+							if (Cliente.conexao.getI() == 1) {
+								JOptionPane.showMessageDialog(null, "O outro cliente Aceitou as alterações ");//+Cliente.id);
+								Cliente.conexao.setI();
+							}
+							if (Cliente.conexao.getI() == 2) {
+								JOptionPane.showMessageDialog(null, "O outro cliente descartou as alterações ");//+Cliente.id);
+								Cliente.conexao.setI();
+							}
+					}
+					
+						
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+				}
+			}
+		};
+	}
+	
 	private TimerTask check_alteracao() {
 		return new TimerTask() {
 			@Override
 			public void run() {
 				try {
+					
 					if (Cliente.conexao.ListaMudou() && Cliente.id != Cliente.conexao.getIdPlayer()) {
 						int resposta = JOptionPane.showConfirmDialog(null, "Cliente " + String.valueOf(Cliente.id)
 								+ ": Alterações foram feitas, salvar alterações?\nsim/ nao");
@@ -53,12 +80,10 @@ public class TelaInicial {
 							Cliente.conexao.confirmaLista(false, Cliente.id);
 							JOptionPane.showMessageDialog(null, "As alterações foram descartadas!");
 						}
+												
 					}
-
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					// try to reconnect to another server
-					// connectToServer(GameConfigs.getConfigArray("servers").getString(1));
 				}
 			}
 		};
@@ -111,10 +136,10 @@ public class TelaInicial {
 				try {
 					if (Cliente.conexao.getPosso(Cliente.id)) {
 						String resposta = JOptionPane.showInputDialog(null, "Insira uma faixa");
-						if (resposta != null) {
-							Cliente.conexao.inserir(resposta);
+						if (resposta.equals("")) {
+							JOptionPane.showMessageDialog(null, "a faixa não deve estar vazia");
 						}else {
-							Cliente.conexao.setIdPlayer(Cliente.id);
+							Cliente.conexao.inserir(resposta);
 						}
 							
 						Cliente.conexao.ListaMudou();
@@ -123,7 +148,9 @@ public class TelaInicial {
 								JOptionPane.OK_OPTION);
 					}
 
-				} catch (RemoteException e) {
+				} catch (NullPointerException i) {
+					
+				}catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

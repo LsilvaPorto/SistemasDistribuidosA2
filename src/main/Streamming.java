@@ -28,4 +28,8 @@ public interface Streamming extends java.rmi.Remote {
 	
 	public void reset() throws java.rmi.RemoteException;
 	
+	public int getI() throws java.rmi.RemoteException;
+
+	public void setI() throws java.rmi.RemoteException;
+
 }

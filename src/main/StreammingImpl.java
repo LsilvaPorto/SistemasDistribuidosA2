@@ -60,15 +60,18 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 	@Override
 	public void confirmaLista(boolean salve, long cliente_id) {
 		if(salve) {
-		  lista.add(listaVirtual.get(listaVirtual.size()-1));
-		  this.idPlayer = cliente_id;
+//		  lista.add(listaVirtual.get(listaVirtual.size()-1));
+			lista.clear();
+			lista.addAll(listaVirtual);
 		}
 		else
 		{
-		  listaVirtual.remove(listaVirtual.size()-1);
+//		  listaVirtual.remove(listaVirtual.size()-1);
+			listaVirtual.clear();
+			listaVirtual.addAll(lista);
 		}
-		
-		
+		this.idPlayer = cliente_id;		// esse cara faz com que cada alteração na lista resulte na mudança de player
+
 	}
 	
 	@Override

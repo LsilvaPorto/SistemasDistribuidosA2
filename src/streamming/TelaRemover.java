@@ -50,7 +50,8 @@ public class TelaRemover {
 					String selecionado = list.getSelectedValue().toString();
 					Cliente.conexao.remover(selecionado);
 					JOptionPane.showMessageDialog(null, "A faixa: " + selecionado + " foi removida com sucesso!");
-					Cliente.conexao.setIdPlayer(0);
+					System.out.println(Cliente.id);
+					Cliente.conexao.ListaMudou();
 					hide();
 					
 				} catch (RemoteException e) {

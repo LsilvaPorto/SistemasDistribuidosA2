@@ -96,7 +96,7 @@ public class TelaSelecionarServidor {
 		btnServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Streamming con = (Streamming) Naming.lookup("//10.0.200.86/streamming");
+					Streamming con = (Streamming) Naming.lookup("//10.0.200.1/streamming");
 					Cliente.conexao = con;
 					if (con.getIdPlayer() == 0) {
 						con.setIdPlayer(Cliente.id);

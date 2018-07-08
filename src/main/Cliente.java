@@ -18,19 +18,11 @@ public class Cliente {
 		tela.show();
 		try {
 //			conexao = (Streamming) Naming.lookup("//localhost/streamming");
-
-			if (conexao.getIdPlayer() == 0) {
-				conexao.setIdPlayer(id);
-				System.out.println(conexao.getIdPlayer());
-			}
 			System.out.println(id);
-			
 			
 		} catch (Exception murle) {
 
 		}
 	}
-	void setId() {
-		
-	}
+	
 }

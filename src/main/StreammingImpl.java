@@ -51,7 +51,26 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 		} else
 			return false;
 	}
+	
+	public boolean ListaMudou() {
+		return lista.equals(listaVirtual) ? false : true;
+	}
 
+	
+	@Override
+	public void confirmaLista(boolean salve, long cliente_id) {
+		if(salve) {
+		  lista.add(listaVirtual.get(listaVirtual.size()-1));
+		  this.idPlayer = cliente_id;
+		}
+		else
+		{
+		  listaVirtual.remove(listaVirtual.size()-1);
+		}
+		
+		
+	}
+	
 	@Override
 	public String returnList(long id) throws RemoteException {
 		if (!lista.equals(listaVirtual)) {
@@ -78,12 +97,22 @@ public class StreammingImpl extends UnicastRemoteObject implements Streamming {
 	}
 	@Override
 	public void setIdPlayer(long id) throws RemoteException {
+		//System.out.println("setando id: "+String.valueOf(id));
 		this.idPlayer = id;
 	}
 
 	@Override
 	public long getIdPlayer() {
+		//System.out.println("Pegando id player");
 		return idPlayer;
+	}
+
+	@Override
+	public void reset() throws RemoteException {
+		this.idPlayer = 0;
+		this.lista.clear(); 
+		this.listaVirtual.clear();
+				
 	}
 
 }

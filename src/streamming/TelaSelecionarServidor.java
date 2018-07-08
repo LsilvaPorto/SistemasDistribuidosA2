@@ -76,6 +76,10 @@ public class TelaSelecionarServidor {
 				try {
 					Streamming con = (Streamming) Naming.lookup("//10.0.200.118/streamming");
 					Cliente.conexao = con;
+					if (con.getIdPlayer() == 0) {
+						con.setIdPlayer(Cliente.id);
+						System.out.println(con.getIdPlayer());
+					}
 					TelaInicial tela = new TelaInicial();
 					tela.show();
 					hide();
@@ -94,6 +98,10 @@ public class TelaSelecionarServidor {
 				try {
 					Streamming con = (Streamming) Naming.lookup("//10.0.200.86/streamming");
 					Cliente.conexao = con;
+					if (con.getIdPlayer() == 0) {
+						con.setIdPlayer(Cliente.id);
+						System.out.println(con.getIdPlayer());
+					}
 					TelaInicial tela = new TelaInicial();
 					tela.show();
 					hide();

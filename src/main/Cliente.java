@@ -4,7 +4,6 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import streamming.TelaSelecionarServidor;
-import streamming.TelaInicial;
 
 public class Cliente {
 	
@@ -30,7 +29,6 @@ public class Cliente {
 		} catch (Exception murle) {
 
 		}
-		
 	}
 	void setId() {
 		

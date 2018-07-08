@@ -20,6 +20,12 @@ public interface Streamming extends java.rmi.Remote {
 
 	String returnList(long id) throws java.rmi.RemoteException;
 
+	public boolean ListaMudou() throws java.rmi.RemoteException;
+	
 	public boolean checkList() throws java.rmi.RemoteException;
+	
+	public void confirmaLista(boolean salve, long cliente_id) throws java.rmi.RemoteException;
+	
+	public void reset() throws java.rmi.RemoteException;
 	
 }

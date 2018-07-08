@@ -41,11 +41,11 @@ public class TelaListar {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
+				/*try {
 					Cliente.conexao.setIdPlayer(0);
 				} catch (Exception e) {
 					
-				}
+				}*/
 				hide();
 			}
 		});

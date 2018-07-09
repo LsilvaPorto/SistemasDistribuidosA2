@@ -10,12 +10,12 @@ import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
-public class Servidor {
+public class Teste {
 
-	public Servidor() throws MalformedURLException, NotBoundException, RemoteException {
+	public Teste() throws MalformedURLException, NotBoundException, RemoteException {
 		try {
 			Streamming obj = new StreammingImpl();
-			Naming.rebind("//192.168.56.1/streamming", obj);
+			Naming.rebind("//192.168.56.1/streamming:2000", obj);
 			System.out.println("Servidor Online");
 //			this.time.schedule(this.check(), new Date(), 8000);
 		} catch (Exception e) {
@@ -24,7 +24,7 @@ public class Servidor {
 		boolean test = true;
 		while(test) {
 		try {
-			Streamming con = (Streamming) Naming.lookup("//192.168.56.1/streamming:2000");
+			Streamming con = (Streamming) Naming.lookup("//192.168.56.1/streamming");
 			if (con.getIdPlayer()!= 0) {
 				System.out.println("X antes da conexao: "+x);
 				x = con.getIdPlayer();
@@ -39,8 +39,9 @@ public class Servidor {
 	long x = 0;
 
 	public static void main(String[] args) throws MalformedURLException, NotBoundException, RemoteException {
-		new Servidor();
+		new Teste();
 
 	}
 
+	
 }

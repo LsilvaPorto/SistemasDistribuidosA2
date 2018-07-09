@@ -22,7 +22,7 @@ public class Servidor {
 			System.out.println("Erro: " + e);
 		}
 	} 
-	long x = 1;
+	long x = 0;
 
 	public static void main(String[] args) throws MalformedURLException, NotBoundException {
 		new Servidor();

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Timer;
@@ -17,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import main.Cliente;
+import main.Streamming;
 
 public class TelaInicial {
 
@@ -45,11 +49,11 @@ public class TelaInicial {
 				try {
 						if (Cliente.id != Cliente.conexao.getIdPlayer()) {	
 							if (Cliente.conexao.getI() == 1) {
-								JOptionPane.showMessageDialog(null, "O outro cliente Aceitou as alterações ");//+Cliente.id);
+								JOptionPane.showMessageDialog(null, Cliente.id+" O outro cliente Aceitou as alterações ");//+Cliente.id);
 								Cliente.conexao.setI();
 							}
 							if (Cliente.conexao.getI() == 2) {
-								JOptionPane.showMessageDialog(null, "O outro cliente descartou as alterações ");//+Cliente.id);
+								JOptionPane.showMessageDialog(null, Cliente.id+"O outro cliente descartou as alterações ");//+Cliente.id);
 								Cliente.conexao.setI();
 							}
 					}
@@ -138,11 +142,13 @@ public class TelaInicial {
 						String resposta = JOptionPane.showInputDialog(null, "Insira uma faixa");
 						if (resposta.equals("")) {
 							JOptionPane.showMessageDialog(null, "a faixa não deve estar vazia");
+						}else if (Cliente.conexao.exibir().contains(resposta)){
+							JOptionPane.showMessageDialog(null, "Faixa já inserida");
 						}else {
 							Cliente.conexao.inserir(resposta);
 						}
 							
-						Cliente.conexao.ListaMudou();
+//						Cliente.conexao.ListaMudou();
 					} else {
 						JOptionPane.showMessageDialog(null, "Aguarde a sua vez", "Não é a sua vez",
 								JOptionPane.OK_OPTION);
@@ -212,9 +218,23 @@ public class TelaInicial {
 		JButton btnResetServidor = new JButton("Reset Servidor");
 		btnResetServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String resp;
 				try {
 					Cliente.conexao.reset();
-				} catch (RemoteException e) {
+					JOptionPane.showMessageDialog(null, "O servidor foi reiniciado e você está desconectado!");
+					resp = JOptionPane.showInputDialog(null, "Caso queira se reconectar\n Insira 's1'"
+							+ " para Servidor 1 ou 's2' para Servidor 2");
+					if (resp.equals("s1")) {
+						Streamming con = (Streamming) Naming.lookup("//10.0.200.81/streamming");
+						Cliente.conexao = con;
+						con.setIdPlayer(Cliente.id);
+						}else if (resp.equals("s2")) {
+							Streamming con = (Streamming) Naming.lookup("//10.0.200.81/streamming");
+							Cliente.conexao = con;
+							con.setIdPlayer(Cliente.id);
+					}
+					
+				} catch (RemoteException |MalformedURLException | NotBoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

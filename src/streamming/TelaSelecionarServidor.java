@@ -74,7 +74,7 @@ public class TelaSelecionarServidor {
 		btnServidor1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Streamming con = (Streamming) Naming.lookup("//192.168.56.1/streamming");
+					Streamming con = (Streamming) Naming.lookup("//10.0.200.118/streamming");
 					Cliente.conexao = con;
 					if (con.getIdPlayer() == 0) {
 						con.setIdPlayer(Cliente.id);
@@ -96,7 +96,7 @@ public class TelaSelecionarServidor {
 		btnServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					Streamming con = (Streamming) Naming.lookup("//192.168.56.1/streamming:2000");
+					Streamming con = (Streamming) Naming.lookup("//10.0.200.81/streamming");
 					Cliente.conexao = con;
 					if (con.getIdPlayer() == 0) {
 						con.setIdPlayer(Cliente.id);

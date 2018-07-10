@@ -15,7 +15,7 @@ public class Servidor {
 	public Servidor() throws MalformedURLException, NotBoundException, RemoteException {
 		try {
 			Streamming obj = new StreammingImpl();
-			Naming.rebind("//192.168.56.1/streamming", obj);
+			Naming.rebind("//10.0.200.118/streamming", obj);
 			System.out.println("Servidor Online");
 //			this.time.schedule(this.check(), new Date(), 8000);
 		} catch (Exception e) {
@@ -24,7 +24,7 @@ public class Servidor {
 		boolean test = true;
 		while(test) {
 		try {
-			Streamming con = (Streamming) Naming.lookup("//192.168.56.1/streamming:2000");
+			Streamming con = (Streamming) Naming.lookup("//10.0.200.81/streamming");
 			if (con.getIdPlayer()!= 0) {
 				System.out.println("X antes da conexao: "+x);
 				x = con.getIdPlayer();
